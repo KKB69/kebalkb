@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post</title>
+    <link href="https://fonts.cdnjs.cloudflare.com/ajax/libs/poppins/4.0.1/poppins.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #212223;
+            color: #e1e1e1;
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.8;
+        }
+
+        header {
+            background-color: #000000;
+            padding: 1.5rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .back-button {
+            position: absolute;
+            top: 1rem;
+            left: 1.5rem;
+            background-color: #2a2a2a;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .back-button:hover {
+            transform: translateX(-5px);
+            background-color: #333;
+            border-color: #00ff9d;
+            box-shadow: 0 0 15px rgba(0, 255, 157, 0.3);
+        }
+
+        .blog-container {
+            max-width: 1200px;
+            margin: 6rem auto 4rem;
+            padding: 0 2rem;
+        }
+
+        .blog-header {
+            display: flex;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            align-items: flex-start;
+        }
+
+        .blog-image {
+            width: 400px;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .blog-image:hover {
+            transform: scale(1.02);
+        }
+
+        .blog-title {
+            font-family: 'Denton', serif;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: linear-gradient(45deg, #fff, #00ff9d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .blog-intro {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #00ff9d;
+            font-weight: 300;
+        }
+
+        .blog-content {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .blog-content p {
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .blog-content p:first-of-type::first-letter {
+            font-size: 3.5rem;
+            font-weight: bold;
+            float: left;
+            padding: 0.1em 0.1em 0 0;
+            color: #00ff9d;
+            line-height: 0.8;
+        }
+        .blog-content h2 {
+            font-size: 1.5rem;
+            margin: 2.5rem 0 1.5rem;
+            color: #00ff9d;
+        }
+    
+        .blog-content h3 {
+            font-size: 1.5rem;
+            margin: 2.5rem 0 1.5rem;
+            color: #ffffff;
+        }
+
+        .blog-content blockquote {
+            border-left: 4px solid #00ff9d;
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: #b8b8b8;
+        }
+
+        /* Scroll to top button styles */
+        .scroll-top-button {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: #2a2a2a;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+        }
+
+        .scroll-top-button.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top-button:hover {
+            transform: translateY(-5px);
+            background-color: #333;
+            border-color: #00ff9d;
+            box-shadow: 0 0 15px rgba(0, 255, 157, 0.3);
+        }
+
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Code block styling */
+        pre {
+            background-color: #1a1a1a;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border: 1px solid #333;
+        }
+
+        code {
+            font-family: 'Consolas', monospace;
+            color: #00ff9d;
+        }
+
+        /* Reading time indicator */
+        .reading-time {
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            background-color: rgba(0, 255, 157, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #00ff9d;
+        }
+
+        @media (max-width: 968px) {
+            .blog-header {
+                flex-direction: column;
+            }
+
+            .blog-image {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 1;
+            }
+
+            .blog-title {
+                font-size: 2.5rem;
+            }
+
+            .blog-intro {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .blog-container {
+                padding: 0 1rem;
+            }
+
+            .blog-content {
+                padding: 1.5rem;
+            }
+
+            .reading-time {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="../blog home.html" class="back-button">←</a>
+        <div class="reading-time">5 min read</div>
+    </header>
+    
+    <main class="blog-container">
+        <div class="blog-header">
+            <img src="../blog assets/mind.png " alt="Blog featured image" class="blog-image">
+            <div>
+                <h1 class="blog-title">Mindful Living in a Digital Age</h1>
+                <p class="blog-intro">Discover ways to maintain balance in our increasingly connected world. </p>
+            </div>
+        </div>
+        
+        <div class="blog-content">
+            <p> In today’s digital age, staying connected is easier than ever. With smartphones, tablets, and social media platforms at our fingertips, we’re always just a tap away from information, entertainment, and endless communication. But with all this connectivity comes a challenge—how do we maintain balance and stay mindful in a world that’s constantly buzzing with notifications?
+
+            </p>If you’re feeling overwhelmed by the digital noise, don’t worry—you’re not alone. It’s possible to live mindfully while embracing technology. Here’s how to create a harmonious relationship with the digital world without losing your sense of presence.</p>
+            <p>___________________________________________________________________________</p>
+            
+
+
+            <h2>1. The Power of Digital Detoxes: When to Unplug</h2>
+            <p>While technology is an incredible tool, it can also become a source of distraction and stress if overused. That’s where a digital detox comes in. Taking a break from screens, even for a few hours, can give your mind the space it needs to recharge and refocus.
+
+            </p>Try This: Designate one day a week (or even just an evening) to go “screen-free.” Use that time to engage in offline activities like reading, journaling, or spending time outdoors. You’ll be amazed at how refreshed you feel after disconnecting for a bit.
+                
+                </p>
+
+
+            
+            <h2>2. Practice Mindful Consumption: Curate Your Digital Diet</h2>
+            <p>Just like with food, we need to be mindful of what we consume digitally. Instead of mindlessly scrolling through social media or binge-watching the latest shows, take a moment to ask yourself: Is this adding value to my life?
+
+            </p>By curating a “digital diet” of positive, inspiring, or educational content, you can turn your online experience into something that nourishes your mind instead of draining your energy.
+                
+            </p>Tip: Unfollow accounts that don’t make you feel good and subscribe to channels, podcasts, or blogs that enrich your life. It’s like eating healthy for your brain!
+                
+                </p>
+
+
+
+            <h2>3. Set Digital Boundaries: You Control the Tech, Not the Other Way Around</h2>
+            <p>One of the most important aspects of mindful living in a digital age is setting boundaries with your technology. It’s easy to feel controlled by your devices, constantly reacting to every ping and notification. But remember, you’re in charge!
+
+            </p>Try This: Turn off non-essential notifications. Create “no-phone zones” in your home, like the dining room or bedroom, to foster more presence in your personal space. And set time limits on apps that tend to suck you in (looking at you, TikTok!).</p>
+            
+            
+            
+            <h2>4. Be Present in Real Life: The Joy of Face-to-Face Connection</h2>
+            <p>No matter how many digital friends or followers you have, nothing beats the power of face-to-face connection. In our hyper-connected world, it’s easy to get caught up in virtual interactions and forget the importance of real-life relationships.
+
+            </p>Make an effort to be fully present when spending time with loved ones. Put the phone away during meals, outings, or conversations, and engage wholeheartedly with the people around you.
+                
+            </p>Remember: Your online presence isn’t as important as your real-world presence.
+                
+                </p>
+
+           
+           
+                <h2>5. Mindful Tech Use: Embrace Tech with Intention</h2>
+            <p>Mindfulness doesn’t mean swearing off technology altogether—it’s about using it in a way that aligns with your values and goals. Be intentional with how you engage with your devices. Instead of using your phone as a default distraction, try turning it into a tool for mindfulness.
+
+            </p>Example: Use apps like Headspace or Calm for meditation, or set reminders on your phone to take deep breaths and stretch throughout the day. Technology, when used mindfully, can enhance your well-being.</p>
+
+            
+            
+            <h2>6. Find Stillness Amidst the Digital Noise</h2>
+            <p>In a world of constant information and content, finding moments of stillness is crucial. Whether it’s through meditation, yoga, or simply sitting quietly for a few minutes each day, creating space for stillness helps ground you in the present moment.
+
+            </p>Even if you spend most of your day connected to devices, carving out time for digital-free mindfulness practices can do wonders for your mental health.
+                
+            </p>Try This: Start with just five minutes of mindful breathing each day. Close your eyes, focus on your breath, and let your mind quiet down. This simple practice can help reduce stress and improve your ability to focus—even in the midst of digital chaos.
+                
+                </p>
+            
+           
+           
+                <h2>7. Cultivate Gratitude for Technology’s Benefits</h2>
+            <p>Let’s not forget—technology is amazing! It’s allowed us to stay connected with loved ones across the globe, access unlimited knowledge, and make our lives more convenient in countless ways. Mindful living isn’t about rejecting technology; it’s about appreciating it in a balanced way.
+
+            </p>Take a moment to reflect on the positive impact technology has had on your life. By cultivating gratitude for the benefits of the digital age, you can develop a healthier relationship with your devices.</p>
+
+           
+           
+            <h2>8. Balance is Key: Finding Harmony Between Online and Offline Life</h2>
+            <p>Ultimately, mindful living in a digital age is all about balance. Embrace the convenience and connectivity that technology offers, but don’t let it take over your life. By setting boundaries, practicing intentional tech use, and staying present in real-world moments, you can enjoy the best of both worlds.
+
+            </p> Remember, mindfulness isn’t about perfection—it’s about awareness. So, the next time you pick up your phone or log onto social media, do it with intention. And when it’s time to unplug, embrace the quiet and find peace in the stillness.</p>
+
+            <p>___________________________________________________________________________</p>
+            
+            
+            <h3>Final Thoughts</h3>
+            <p>Living mindfully in an increasingly connected world may seem like a challenge, but with a few simple adjustments, it’s completely achievable. By taking control of your technology habits, setting boundaries, and finding moments of presence and stillness, you can create a life that’s both connected and balanced.
+
+            </p>So, go ahead—embrace mindful living in the digital age. Your mind (and your devices) will thank you.
+                
+                </p>
+
+            </div>
+        </div>
+    </main>
+
+<button class="scroll-top-button">↑</button>
+
+    <script>
+        // Scroll to top button functionality
+        const scrollButton = document.querySelector('.scroll-top-button');
+        
+        // Show/hide button based on scroll position
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                scrollButton.classList.add('visible');
+            } else {
+                scrollButton.classList.remove('visible');
+            }
+        });
+
+        // Smooth scroll to top when clicked
+        scrollButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>

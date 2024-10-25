@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found</title>
+    <link href="https://fonts.googleapis.com/css2?family=Denton&display=swap" rel="stylesheet"> <!-- Import Denton font -->
+    <style>
+        body {
+            background-color: #052015; /* Set background color to black */
+            color: white; /* Set text color to white */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center content vertically */
+            align-items: center; /* Center content horizontally */
+            height: 100vh; /* Full viewport height */
+            margin: 0; /* Remove default margin */
+            font-family: 'Denton', serif; /* Set font family to Denton */
+            text-align: center; /* Center align text */
+            overflow: hidden; /* Prevent scrollbars */
+            animation: pulse 5s infinite; /* Infinite pulse animation for the body */
+        }
+
+        h1 {
+            font-size: 100px; /* Set size for 404 text */
+            font-weight: bold; /* Make 404 text bold */
+            animation: zoomInOut 3s infinite alternate; /* Animation for zooming effect */
+        }
+
+        p {
+            font-size: 24px; /* Set size for the message text */
+            max-width: 600px; /* Limit the width of the message */
+            margin-top: 5px; /* Decrease gap between texts */
+            animation: fadeInUp 3s infinite alternate; /* Animation for message text */
+        }
+
+        /* Keyframes for fadeInUp animation */
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Pulsing animation for background */
+        @keyframes pulse {
+            0%, 100% {
+                background-color: #052015;
+            }
+            50% {
+                background-color: #0b242f; /* Slightly lighter for pulse effect */
+            }
+        }
+
+        /* Zooming animation */
+        @keyframes zoomInOut {
+            0% {
+                transform: scale(1); /* Original size */
+                opacity: 1; /* Start visible */
+            }
+            50% {
+                transform: scale(1.1); /* Zoom in */
+                opacity: 1; /* Keep visible */
+            }
+            100% {
+                transform: scale(1); /* Zoom back out */
+                opacity: 1; /* Keep visible */
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>OOPS</h1>
+    <p>There is some mantanience going on. Stay Tune for more updates</p>
+</body>
+</html>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post</title>
+    <link href="https://fonts.cdnjs.cloudflare.com/ajax/libs/poppins/4.0.1/poppins.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #212223;
+            color: #e1e1e1;
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.8;
+        }
+
+        header {
+            background-color: #000000;
+            padding: 1.5rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .back-button {
+            position: absolute;
+            top: 1rem;
+            left: 1.5rem;
+            background-color: #2a2a2a;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .back-button:hover {
+            transform: translateX(-5px);
+            background-color: #333;
+            border-color: #00ff9d;
+            box-shadow: 0 0 15px rgba(0, 255, 157, 0.3);
+        }
+
+        .blog-container {
+            max-width: 1200px;
+            margin: 6rem auto 4rem;
+            padding: 0 2rem;
+        }
+
+        .blog-header {
+            display: flex;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            align-items: flex-start;
+        }
+
+        .blog-image {
+            width: 400px;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .blog-image:hover {
+            transform: scale(1.02);
+        }
+
+        .blog-title {
+            font-family: 'Denton', serif;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: linear-gradient(45deg, #fff, #00ff9d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .blog-intro {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #00ff9d;
+            font-weight: 300;
+        }
+
+        .blog-content {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .blog-content p {
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .blog-content p:first-of-type::first-letter {
+            font-size: 3.5rem;
+            font-weight: bold;
+            float: left;
+            padding: 0.1em 0.1em 0 0;
+            color: #00ff9d;
+            line-height: 0.8;
+        }
+        .blog-content h2 {
+            font-size: 1.5rem;
+            margin: 2.5rem 0 1.5rem;
+            color: #00ff9d;
+        }
+    
+        .blog-content h3 {
+            font-size: 1.5rem;
+            margin: 2.5rem 0 1.5rem;
+            color: #00ff9d;
+        }
+    
+        .blog-content h4 {
+            font-size: 1.5rem;
+            margin: 2.5rem 0 1.5rem;
+            color: #00ff9d;
+        }
+        .blog-content h5 {
+            font-size: 1.5rem;
+            margin: 2.5rem 0 1.5rem;
+            color: #00ff9d;
+        } 
+        .blog-content h6 {
+            font-size: 1.2rem;
+            margin: 2.5rem 0 1.5rem;
+            color: #ffffff;
+        }
+
+        .blog-content blockquote {
+            border-left: 4px solid #00ff9d;
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: #b8b8b8;
+        }
+
+
+        /* Scroll to top button styles */
+        .scroll-top-button {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: #2a2a2a;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+        }
+
+        .scroll-top-button.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top-button:hover {
+            transform: translateY(-5px);
+            background-color: #333;
+            border-color: #00ff9d;
+            box-shadow: 0 0 15px rgba(0, 255, 157, 0.3);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Code block styling */
+        pre {
+            background-color: #1a1a1a;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border: 1px solid #333;
+        }
+
+        code {
+            font-family: 'Consolas', monospace;
+            color: #00ff9d;
+        }
+
+        /* Reading time indicator */
+        .reading-time {
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            background-color: rgba(0, 255, 157, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #00ff9d;
+        }
+
+        @media (max-width: 968px) {
+            .blog-header {
+                flex-direction: column;
+            }
+
+            .blog-image {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 1;
+            }
+
+            .blog-title {
+                font-size: 2.5rem;
+            }
+
+            .blog-intro {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .blog-container {
+                padding: 0 1rem;
+            }
+
+            .blog-content {
+                padding: 1.5rem;
+            }
+
+            .reading-time {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="../blog home.html" class="back-button">←</a>
+        <div class="reading-time">5 min read</div>
+    </header>
+    
+    <main class="blog-container">
+        <div class="blog-header">
+            <img src="../blog assets/ai.jpeg " alt="Blog featured image" class="blog-image">
+            <div>
+                <h1 class="blog-title">The Future of Artificial Intelligence</h1>
+                <p class="blog-intro">Explore the latest developments in AI and how they're shaping our future.</p>
+            </div>
+        </div>
+        
+        <div class="blog-content">
+            <p>Artificial intelligence (AI) has already made its mark on the world, transforming industries and changing the way we live, work, and communicate. From virtual assistants like Siri and Alexa to advanced machine learning models that diagnose diseases, AI is here to stay—and it’s only getting smarter.
+
+                But what does the future of AI hold? As we move forward, the possibilities seem endless. Let’s take a look at the latest developments in AI and explore how this groundbreaking technology is shaping our future.</p>
+            <p>___________________________________________________________________________</p>
+           
+
+
+            <h2>AI in Everyday Life: More Than Just Robots</h2>
+            <p>When people think of AI, they often picture futuristic robots or complex algorithms doing tasks that were once human-only. But the reality is that AI is already an integral part of our daily lives. From recommendation algorithms on Netflix to smart home devices, we’re interacting with AI more than we realize.
+
+            </p>In the future, AI is expected to blend even more seamlessly with our routines. Imagine a world where your smart fridge orders groceries when supplies run low, or where AI-driven health monitors catch early signs of illness before you even feel symptoms. These aren’t sci-fi dreams—they’re closer than you think.</p>
+            
+            
+                <h3>The Rise of Autonomous Systems</h3>
+            <p>Self-driving cars have been in the spotlight for a while now, but they’re only the beginning. Autonomous systems, powered by AI, will soon expand far beyond transportation. We’re looking at drones delivering packages, autonomous robots working in warehouses, and AI-powered vehicles for industries like agriculture and mining.
+
+            </p>In fact, these autonomous systems are expected to revolutionize multiple sectors by making operations safer, faster, and more efficient. Farmers may soon have autonomous machinery plowing fields and harvesting crops, reducing manual labor and increasing precision. This technology promises to change how entire industries operate, making AI an indispensable tool in the future.<p>
+           
+           
+                <h4>AI and Healthcare: A Game Changer</h4>
+            <p>Perhaps the most exciting potential for AI lies in the healthcare industry. We’re already seeing AI being used to analyze medical data, predict patient outcomes, and even assist in surgery. In the near future, AI could become your new healthcare companion, offering personalized treatments based on your unique genetic makeup and lifestyle.
+
+            </p>Take IBM’s Watson, for example, which is capable of sifting through vast amounts of medical research to recommend treatments for cancer patients. As AI continues to learn and adapt, its role in diagnosing diseases and developing new treatments could be revolutionary. Picture a world where AI predicts pandemics, monitors global health trends, and provides real-time solutions.<p>
+            
+            
+                <h5>Ethical Concerns: The AI Debate</h5>
+            <p>As AI continues to advance, it’s important to address the ethical questions that come with it. What happens when AI systems become more autonomous and make decisions without human oversight? Will machines replace jobs, leading to unemployment? And how do we ensure AI is developed and used responsibly?
+
+            </p>These are questions we must tackle as AI grows. Many experts are already working on establishing guidelines and regulations to ensure AI is used ethically and transparently. After all, while AI’s potential is extraordinary, it’s crucial to manage its development carefully to avoid unintended consequences.<p>
+            
+            
+                <h5>AI and Creativity: Beyond the Algorithms</h5>
+            <p>One surprising area where AI is making headway is in creative fields like art, music, and writing. AI-generated art and music are becoming more sophisticated, challenging the idea that creativity is uniquely human. In fact, some AI systems have produced artwork that’s been sold for thousands of dollars!
+
+            </p> While AI may never replace human creativity, it can certainly enhance it. We may see AI tools collaborating with artists and musicians, offering new ways to explore creative expression. Imagine AI as a creative assistant, helping you brainstorm ideas, refine concepts, or even compose music.<p>
+            
+                
+
+             <h5>The Road Ahead: Limitless Possibilities</h5>
+            <p>So, what’s next for AI? The truth is, the possibilities are limitless. As technology evolves, we’ll continue to see breakthroughs in areas we can’t even imagine yet. From enhancing productivity in industries to solving some of the world’s most pressing challenges, AI has the potential to reshape the future in ways we’ve only begun to understand.
+
+            </p>In the end, the future of AI is about more than just creating smarter machines—it’s about improving human lives. As AI continues to advance, we’ll see a future where machines don’t just assist us but elevate us, allowing us to focus on creativity, problem-solving, and the things that truly make us human.</p>
+             
+            
+            <p>___________________________________________________________________________</p>
+                <h6>Artificial intelligence is no longer a distant dream. It’s here, evolving rapidly, and shaping our future in exciting and unexpected ways. Whether you’re excited or cautious about the rise of AI, one thing is certain: we’re entering a new era where AI will play a central role in how we live and work.</h6>
+            </div>
+        </div>
+    </main>
+
+<button class="scroll-top-button">↑</button>
+
+    <script>
+        // Scroll to top button functionality
+        const scrollButton = document.querySelector('.scroll-top-button');
+        
+        // Show/hide button based on scroll position
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                scrollButton.classList.add('visible');
+            } else {
+                scrollButton.classList.remove('visible');
+            }
+        });
+
+        // Smooth scroll to top when clicked
+        scrollButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
